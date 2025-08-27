@@ -1,5 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Google+Sans+Code:ital,wght@0,300..800;1,300..800&display=swap');
 
+*{
+    box-sizing: border-box;
+}
+
+main{
+    width: 600px;
+    margin: 50px auto;
+}
+
 :root {
     color-scheme: light dark;
     --black: #222;
@@ -12,4 +21,32 @@ body {
     display: grid;
     place-content: center;
 }
+
+#header{
+    display: flex;
+    justify-content: space-between;
+    padding: 30px 6px 40px;
+}
+
+button{
+    text-decoration: none;
+    background-color: rgba(255,255,255,0.2);
+    border: 0;
+    padding: 5px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+div#gameSection{
+    line-height: 30px;
+    height: 95px;
+    overflow: hidden;
+}
+
+div.word{
+    display: inline-block;
+    margin: 0 5px
+}
+
+
 
