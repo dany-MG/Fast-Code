@@ -13,6 +13,9 @@ main{
     color-scheme: light dark;
     --black: #222;
     --light: #c0c0c0;
+    --secondaryBlack: #494949;
+    --correctLetter: #23f008;
+    --wrongLetter: #f00808;
 }
 
 body {
@@ -37,16 +40,50 @@ button{
     cursor: pointer;
 }
 
-div#gameSection{
+#gameSection{
     line-height: 30px;
-    height: 95px;
+    height: 90px;
     overflow: hidden;
+    position: relative;
 }
 
-div.word{
-    display: inline-block;
-    margin: 0 5px
+#words{
+    filter: blur(5px);
+    color: var(--secondaryBlack);   
 }
+
+#focus-error{
+    position: absolute;
+    inset: 0;
+    text-align: center;
+    padding-top: 32px;
+}
+
+#gameSection:focus #words{
+    filter: blur(0);
+}
+
+
+#gameSection:focus #focus-error{
+    display: none;
+}
+
+.word{
+    display: inline-block;
+    margin: 0 5px;
+}
+
+.letter.correct {
+    color: var(#fff);
+}
+
+.letter.wrong{
+    color: var(--wrongLetter);
+}
+
+
+
+
 
 
 
