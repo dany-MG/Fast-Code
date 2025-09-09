@@ -14,7 +14,7 @@ function removeClass(el, name){
 
 function wordPicker(){
     const randomIndex = Math.ceil(Math.random() * words.length);
-    return words[randomIndex];
+    return words[randomIndex - 1];
 }
 
 function formatting(word){
@@ -34,6 +34,57 @@ function game(){
 
 document.getElementById('gameSection').addEventListener('keyup', ev =>{
     const key = ev.key;
+<<<<<<< HEAD
+    const currentWordElement = $('.word.current'); //Obtiene la etiqueta html con esas clases
+    const currLetterElement = $('.letter.current'); //Obtiene la etiqueta html con esas clases
+    const expectedLetter = currLetterElement?.innerHTML || ' '; //obtiene el contenido de esa etiqueta html.
+    const isLetter = key.length === 1 && key !== ' '; //verifica si lo que se presiono es una letra o un comando especial como shift, alt, ctrl, etc.
+    const isSpace = key === ' ';
+    //console.log({key, expectedLetter});
+
+    if(isLetter){
+        if(currLetterElement){
+            //alert(key === expectedLetter ? 'ok' : 'wrong');
+            addClass(currLetterElement, key === expectedLetter ? 'correct' : 'wrong');
+            removeClass(currLetterElement, 'current');
+            if(currLetterElement.nextElementSibling){
+                addClass(currLetterElement.nextElementSibling, 'current');//nextElementSibling obtiene el siguiente elemento hermano en el mismo nivel del DOM (span, en este caso).
+            }
+        }else{
+            //es decir, es un espacio en blanco {SPACE BAR}
+            const incorrectSpace = document.createElement('span');
+            incorrectSpace.innerHTML = key;
+            incorrectSpace.className = 'letter wrong extra';
+            currentWordElement.appendChild(incorrectSpace);
+        }
+    }
+
+    if(isSpace){
+        if(expectedLetter !== ' '){
+            const letterToInvalidate = [...$$('.word.current .letter:not(.correct)')]; //array q selecciona todas las letras que no tienen la clase correct.
+            letterToInvalidate.forEach(letter => {
+                addClass(letter, 'wrong');
+            });
+        }
+        removeClass(currentWordElement, 'current');
+        addClass(currentWordElement.nextElementSibling, 'current');
+
+        if(currLetterElement){
+            removeClass(currLetterElement, 'current');
+        }
+        addClass(currentWordElement.nextSibling.firstChild, 'current'); 
+    }
+
+    //moviendo el cursor al final de cada letra
+    const nextLetter = $('.letter.current');
+    const nextWord = $('.word.current');
+    const cursor = document.getElementById('cursor');
+    cursor.style.top = (nextLetter || nextWord).getBoundingClientRect().top + 'px';
+    if(nextLetter){
+        cursor.style.left = nextLetter.getBoundingClientRect().left + 'px';
+    }else{
+        cursor.style.left = nextWord.getBoundingClientRect().right + 'px';
+=======
     const currLetterElement = $('.letter.current'); //Obtiene la etiqueta html con esas clases
     const expectedLetter = currLetterElement.innerHTML; //obtiene el contenido de esa etiqueta html.
     console.log({key, expectedLetter});
@@ -42,6 +93,7 @@ document.getElementById('gameSection').addEventListener('keyup', ev =>{
         //correct key
         addClass(currLetterElement, 'correct');
         currLetterElement.style.color = 'var(--correctLetter)';
+>>>>>>> e4c818ba9a9e161f2cdc754a074ada8546fbe587
     }
 }); //va a escuchar cuando estamos presionando una tecla.
 
